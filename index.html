@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic clock</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    body{
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        background-color: rgba(167, 199, 131, 0.822);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+        color:black;
+        
+    }
+    .clock{
+        width: 300px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .clock div{
+        font-family:digital-7;
+        font-size:50px;
+        width: 40px;
+        text-align: center;
+        border-radius: 30%;
+    }
+    .txt{
+        margin-left: 10px;
+    }
+    .h::before,.m::before,.s::before{
+        position: absolute;
+    }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="h"></div>
+        <div class="h"></div>
+        <div>:</div>
+
+        <div class="m">0</div>
+        <div class="m">0</div>
+        <div>:</div>
+
+        <div class="s">0</div>
+        <div class="s">0</div>
+        <div class="txt">PM</div>
+    </div>
+</body>
+<script>
+     const clock=document.querySelector('.clock');
+     function runClock(){
+         var time=new Date();
+         var hrs=time.getHours();
+         var min=time.getMinutes();
+         var sec=time.getSeconds();
+         var txt="AM";
+    if(hrs>12){
+        hrs=hrs-12;
+        txt="PM";
+    }
+    else if(hrs==0){
+        hrs=12;
+        txt="AM";
+    }
+    hrs=hrs<10?'0'+hrs:hrs;
+    min=min<10?'0'+min:min;
+    sec=sec<10?'0'+sec:sec;
+
+    const h=document.querySelectorAll('.h');
+    const m=document.querySelectorAll('.m');
+    const s=document.querySelectorAll('.s');
+
+hrs=hrs.toString();
+h[0].innerHTML=hrs[0];
+h[1].innerHTML=hrs[1];
+min=min.toString();
+m[0].innerHTML=min[0];
+m[1].innerHTML=min[1];
+sec=sec.toString();
+s[0].innerHTML=sec[0];
+s[1].innerHTML=sec[1];
+
+
+}
+runClock();
+setInterval(runClock,1000);
+
+    
+</script>
+</html>
